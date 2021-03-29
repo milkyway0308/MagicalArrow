@@ -8,12 +8,24 @@ import org.bukkit.event.entity.ProjectileHitEvent
 import skywolf46.magicalarrow.data.ProjectileCover
 
 abstract class AbstractArrowEffect {
-    open fun onArrowCollideBlock(cover: ProjectileCover, collide: Location, bl: Block, pl: Player, ev: ProjectileHitEvent) {
+    open fun onArrowCollideBlock(
+        cover: ProjectileCover,
+        collide: Location,
+        bl: Block,
+        pl: Player,
+        ev: ProjectileHitEvent,
+    ) {
 
     }
 
 
-    open fun onArrowCollideEntity(cover: ProjectileCover, collide: Location, victim: Entity, pl: Player, ev: ProjectileHitEvent) {
+    open fun onArrowCollideEntity(
+        cover: ProjectileCover,
+        collide: Location,
+        victim: Entity,
+        pl: Player,
+        ev: ProjectileHitEvent,
+    ) {
 
     }
 
@@ -25,4 +37,9 @@ abstract class AbstractArrowEffect {
     open fun onArrowShoot(projectile: ProjectileCover, pl: Player) {
 
     }
+
+    open fun priority(): Int {
+        return 0
+    }
+
 }

@@ -32,7 +32,7 @@ class ProjectileListener : Listener {
                         val list = getList("MagicalArrow")!!
                         for (x in (0 until list.size())) {
                             MagicalArrow.get(list.get(x)?.get() as String)
-                                ?.onArrowShoot(ProjectileCover(arrowItem.clone(), arrow), entity as Player)
+                                ?.onArrowShoot(ProjectileCover(arrowItem.clone(), entity as Player, arrow), entity as Player)
                             if (arrowItem.amount > 1)
                                 arrowItem.amount -= 1
                             else
@@ -53,7 +53,7 @@ class ProjectileListener : Listener {
                 if (hitBlock != null) {
                     for (x in (0 until list.size())) {
                         MagicalArrow.get(list.get(x)?.get() as String)
-                            ?.onArrowCollideBlock(ProjectileCover(item.clone(), entity),
+                            ?.onArrowCollideBlock(ProjectileCover(item.clone(), entity.shooter as Player,entity),
                                 entity.location, hitBlock!!,
                                 entity.shooter as Player,
                                 this@onEvent)
@@ -61,7 +61,7 @@ class ProjectileListener : Listener {
                 } else if (hitEntity != null) {
                     for (x in (0 until list.size())) {
                         MagicalArrow.get(list.get(x)?.get() as String)
-                            ?.onArrowCollideEntity(ProjectileCover(item.clone(), entity),
+                            ?.onArrowCollideEntity(ProjectileCover(item.clone(), entity.shooter as Player,entity),
                                 entity.location, hitEntity!!,
                                 entity.shooter as Player,
                                 this@onEvent)

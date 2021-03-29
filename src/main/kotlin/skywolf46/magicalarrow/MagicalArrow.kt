@@ -32,6 +32,8 @@ class MagicalArrow : JavaPlugin() {
         register("explosive", ExplosiveArrowEffect())
         register("mine", MineArrow())
         register("swap", LocationSwapArrow())
+        register("sonar", SonarArrowEffect())
+        register("thunder", ThunderStrikeArrow())
         Bukkit.getPluginManager().registerEvents(ProjectileListener(), this)
     }
 }
