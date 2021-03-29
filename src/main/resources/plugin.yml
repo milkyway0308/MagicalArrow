@@ -1,0 +1,7 @@
+name: MagicalArrow
+version: ${version}
+main: skywolf46.magicalarrow.MagicalArrow
+depend:
+  - CommandAnnotation
+  - ReflectedNBTWrapper
+  - SkywolfExtraUtility
