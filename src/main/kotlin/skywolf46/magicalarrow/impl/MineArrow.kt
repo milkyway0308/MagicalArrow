@@ -20,7 +20,6 @@ class MineArrow : AbstractArrowEffect() {
         cover: ProjectileCover,
         collide: Location,
         bl: Block,
-        pl: Player,
         ev: ProjectileHitEvent,
     ) {
         val data = AtomicInteger(0)

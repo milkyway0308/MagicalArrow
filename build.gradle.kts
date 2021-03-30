@@ -47,14 +47,14 @@ repositories {
 
 dependencies {
 
-    compileOnly("skywolf46:exutil:latest.release") {
+    compileOnly("skywolf46:exutil:1.33.0") {
         isChanging = true
     }
 
     compileOnly("skywolf46:commandannotation:latest.release") {
         isChanging = true
     }
-    compileOnly("skywolf46:refnbt:1.4.1")
+    compileOnly("skywolf46:refnbt:1.5.0")
     compileOnly(files("V:/API/Java/Minecraft/Bukkit/Spigot/Spigot 1.12.2.jar"))
 }
 

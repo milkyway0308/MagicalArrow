@@ -13,10 +13,9 @@ class ExplosiveArrowEffect : AbstractArrowEffect(){
         cover: ProjectileCover,
         collide: Location,
         bl: Block,
-        pl: Player,
         ev: ProjectileHitEvent
     ) {
-        cover.projectile.remove()
+        cover.removeAbility(this)
         collide.world.createExplosion(
             collide, 0.5f, false
         )
@@ -26,10 +25,9 @@ class ExplosiveArrowEffect : AbstractArrowEffect(){
         cover: ProjectileCover,
         collide: Location,
         victim: Entity,
-        pl: Player,
         ev: ProjectileHitEvent
     ) {
-        cover.projectile.remove()
+        cover.removeAbility(this)
         collide.world.createExplosion(
             collide, 0.5f, false
         )

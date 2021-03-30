@@ -5,7 +5,6 @@ import org.bukkit.Sound
 import org.bukkit.block.Block
 import org.bukkit.entity.Entity
 import org.bukkit.entity.LivingEntity
-import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
@@ -18,10 +17,10 @@ class SonarArrowEffect : AbstractArrowEffect() {
     override fun onArrowCollideBlock(
         cover: ProjectileCover,
         collide: Location,
-        block: Block,
-        pl: Player,
+        bl: Block,
         ev: ProjectileHitEvent,
     ) {
+        cover.removeAbility(this)
         val expire = AtomicInteger(12)
         selfCancelRepeat(20L) {
             if (!cover.projectile.isValid) {
@@ -38,7 +37,6 @@ class SonarArrowEffect : AbstractArrowEffect() {
                 }
             }
             if (expire.decrementAndGet() <= 0) {
-                cover.projectile.remove()
                 it.set(true)
             } else {
                 cover.projectile.world.playSound(
@@ -52,13 +50,13 @@ class SonarArrowEffect : AbstractArrowEffect() {
     override fun onArrowCollideEntity(
         cover: ProjectileCover,
         collide: Location,
-        entity: Entity,
-        pl: Player,
+        victim: Entity,
         ev: ProjectileHitEvent,
     ) {
+        cover.removeAbility(this)
         val expire = AtomicInteger(24)
         selfCancelRepeat(10L) {
-            if (!entity.isValid) {
+            if (!victim.isValid) {
                 it.set(true)
                 return@selfCancelRepeat
             }

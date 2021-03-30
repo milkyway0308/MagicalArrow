@@ -9,6 +9,7 @@ import org.bukkit.event.entity.EntityShootBowEvent
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.metadata.FixedMetadataValue
+import skywolf46.extrautility.util.setValue
 import skywolf46.magicalarrow.MagicalArrow
 import skywolf46.magicalarrow.data.ProjectileCover
 import skywolf46.refnbt.util.item.getTag
@@ -28,16 +29,17 @@ class ProjectileListener : Listener {
                         projectile.remove()
                         arrow.shooter = entity
                         arrow.pickupStatus = Arrow.PickupStatus.DISALLOWED
-                        arrow.setMetadata("MagicalArrow", FixedMetadataValue(MagicalArrow.inst, arrowItem.clone()))
+                        val cover = ProjectileCover(arrowItem.clone(), entity as Player, arrow)
+                        arrow.setValue("MagicalArrow", cover)
                         val list = getList("MagicalArrow")!!
                         for (x in (0 until list.size())) {
                             MagicalArrow.get(list.get(x)?.get() as String)
-                                ?.onArrowShoot(ProjectileCover(arrowItem.clone(), entity as Player, arrow), entity as Player)
-                            if (arrowItem.amount > 1)
-                                arrowItem.amount -= 1
-                            else
-                                arrowItem.type = Material.AIR
+                                ?.onArrowShoot(cover)
                         }
+                        if (arrowItem.amount > 1)
+                            arrowItem.amount -= 1
+                        else
+                            arrowItem.type = Material.AIR
                     }
                 }
             }
@@ -47,23 +49,21 @@ class ProjectileListener : Listener {
     @EventHandler
     fun ProjectileHitEvent.onEvent() {
         if (entity.hasMetadata("MagicalArrow")) {
-            val item = entity.getMetadata("MagicalArrow")[0].value() as ItemStack
-            with(item.getTag()) {
+            val item = entity.getMetadata("MagicalArrow")[0].value() as ProjectileCover
+            with(item.item.getTag()) {
                 val list = getList("MagicalArrow")!!
                 if (hitBlock != null) {
                     for (x in (0 until list.size())) {
                         MagicalArrow.get(list.get(x)?.get() as String)
-                            ?.onArrowCollideBlock(ProjectileCover(item.clone(), entity.shooter as Player,entity),
+                            ?.onArrowCollideBlock(item,
                                 entity.location, hitBlock!!,
-                                entity.shooter as Player,
                                 this@onEvent)
                     }
                 } else if (hitEntity != null) {
                     for (x in (0 until list.size())) {
                         MagicalArrow.get(list.get(x)?.get() as String)
-                            ?.onArrowCollideEntity(ProjectileCover(item.clone(), entity.shooter as Player,entity),
+                            ?.onArrowCollideEntity(item,
                                 entity.location, hitEntity!!,
-                                entity.shooter as Player,
                                 this@onEvent)
                     }
                 }

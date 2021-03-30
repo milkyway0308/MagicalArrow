@@ -11,14 +11,18 @@ import skywolf46.magicalarrow.listener.ProjectileListener
 class MagicalArrow : JavaPlugin() {
     companion object {
         private val map = HashMap<String, AbstractArrowEffect>()
+        private val revMap = HashMap<AbstractArrowEffect, String>()
         lateinit var inst: MagicalArrow
             private set
 
         fun register(str: String, eff: AbstractArrowEffect) {
             map[str] = eff
+            revMap[eff] = str
         }
 
-        fun get(str: String) = map[str]
+        operator fun get(str: String) = map[str]
+
+        operator fun get(eff: AbstractArrowEffect) = revMap[eff]
 
         fun getList() : List<String> = ArrayList<String>(map.keys)
     }
@@ -34,6 +38,8 @@ class MagicalArrow : JavaPlugin() {
         register("swap", LocationSwapArrow())
         register("sonar", SonarArrowEffect())
         register("thunder", ThunderStrikeArrow())
+        register("freeze", FreezingArrow)
+        register("frosthorn", FrostHornArrow)
         Bukkit.getPluginManager().registerEvents(ProjectileListener(), this)
     }
 }

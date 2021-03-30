@@ -4,8 +4,7 @@ import org.bukkit.entity.Player
 import skywolf46.magicalarrow.abstraction.AbstractArrowEffect
 import skywolf46.magicalarrow.data.ProjectileCover
 
-class TracingArrowEffect : AbstractArrowEffect(){
-
+class LightSpeedTrailArrow : AbstractArrowEffect() {
     override fun onArrowShoot(projectile: ProjectileCover) {
 
     }

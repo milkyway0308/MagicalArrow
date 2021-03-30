@@ -6,6 +6,7 @@ import org.bukkit.entity.Player
 import skywolf46.commandannotation.annotations.autocomplete.AutoComplete
 import skywolf46.commandannotation.annotations.autocomplete.AutoCompleteProvider
 import skywolf46.commandannotation.annotations.legacy.MinecraftCommand
+import skywolf46.commandannotation.annotations.minecraft.PermissionHandler
 import skywolf46.commandannotation.data.command.CommandArgument
 import skywolf46.commandannotation.util.AutoCompleteUtil
 import skywolf46.magicalarrow.MagicalArrow
@@ -14,6 +15,7 @@ import skywolf46.refnbt.util.item.getTag
 object ArrowCommand {
     @MinecraftCommand("/magicalarrow")
     @AutoComplete("arrowList")
+    @PermissionHandler(value = "magicalarrow.admin", message = "§cNot enough permission.")
     @JvmStatic
     fun Player.onArrowAttach(arg: CommandArgument) {
         if (arg.length() < 1) {
@@ -22,7 +24,7 @@ object ArrowCommand {
             sendMessage("§7If you don't know arrow name, use §eTab Complete§7.")
             return
         }
-        if (MagicalArrow.get(arg[0]) == null) {
+        if (MagicalArrow[arg[0]] == null) {
             sendMessage("§cUnknown arrow ability.")
             return
         }

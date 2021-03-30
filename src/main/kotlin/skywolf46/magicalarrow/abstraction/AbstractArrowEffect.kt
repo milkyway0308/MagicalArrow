@@ -12,7 +12,6 @@ abstract class AbstractArrowEffect {
         cover: ProjectileCover,
         collide: Location,
         bl: Block,
-        pl: Player,
         ev: ProjectileHitEvent,
     ) {
 
@@ -23,20 +22,21 @@ abstract class AbstractArrowEffect {
         cover: ProjectileCover,
         collide: Location,
         victim: Entity,
-        pl: Player,
         ev: ProjectileHitEvent,
     ) {
 
     }
 
-    open fun onArrowTick(projectile: ProjectileCover, pl: Player) {
+    open fun onArrowTick(projectile: ProjectileCover) {
 
     }
 
 
-    open fun onArrowShoot(projectile: ProjectileCover, pl: Player) {
+    open fun onArrowShoot(projectile: ProjectileCover) {
 
     }
+
+    open fun requireDestroy() = false
 
     open fun priority(): Int {
         return 0

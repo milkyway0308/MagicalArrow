@@ -16,34 +16,27 @@ class LocationSwapArrow : AbstractArrowEffect() {
         cover: ProjectileCover,
         collide: Location,
         bl: Block,
-        pl: Player,
         ev: ProjectileHitEvent,
     ) {
         val loc = cover.projectile.location
-        cover.projectile.teleport(pl.location)
-        pl.teleport(loc)
-        pl.playSound(pl.location, Sound.ENTITY_ENDERMEN_TELEPORT, 0.8f, 1.4f)
-        if (cover.projectile is Arrow)
-            schedule(40) {
-                cover.projectile.remove()
-            }
+        cover.projectile.teleport(cover.player.location)
+        cover.player.teleport(loc)
+        cover.player.playSound(cover.player.location, Sound.ENTITY_ENDERMEN_TELEPORT, 0.8f, 1.4f)
+        cover.removeAbility(this)
     }
 
     override fun onArrowCollideEntity(
         cover: ProjectileCover,
         collide: Location,
         victim: Entity,
-        pl: Player,
         ev: ProjectileHitEvent
     ) {
         val loc = cover.projectile.location
-        cover.projectile.teleport(pl.location)
-        pl.teleport(loc)
-        pl.playSound(pl.location, Sound.ENTITY_ENDERMEN_TELEPORT, 0.8f, 1.4f)
-        if (cover.projectile is Arrow)
-            schedule(40) {
-                cover.projectile.remove()
-            }
+        cover.projectile.teleport(cover.player.location)
+        cover.player.teleport(loc)
+        cover.player.playSound(cover.player.location, Sound.ENTITY_ENDERMEN_TELEPORT, 0.8f, 1.4f)
+        cover.removeAbility(this)
+
     }
 
 }

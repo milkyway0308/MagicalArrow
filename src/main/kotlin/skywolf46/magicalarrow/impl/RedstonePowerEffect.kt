@@ -19,9 +19,9 @@ class RedstonePowerEffect : AbstractArrowEffect() {
         cover: ProjectileCover,
         collide: Location,
         bl: Block,
-        pl: Player,
         ev: ProjectileHitEvent,
     ) {
+        cover.removeAbility(this)
         val data = AtomicInteger(0)
         val expireOn = AtomicInteger(100)
         data.set(

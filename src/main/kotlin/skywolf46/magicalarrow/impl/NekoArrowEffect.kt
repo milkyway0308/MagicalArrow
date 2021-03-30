@@ -9,7 +9,7 @@ import skywolf46.magicalarrow.data.ProjectileCover
 import kotlin.random.Random
 
 class NekoArrowEffect : AbstractArrowEffect(){
-    override fun onArrowShoot(projectile: ProjectileCover, pl: Player) {
+    override fun onArrowShoot(projectile: ProjectileCover) {
         val vector = projectile.projectile.velocity
         projectile.projectile = projectile.projectile.world.spawnEntity(
             projectile.projectile.location,
@@ -17,7 +17,7 @@ class NekoArrowEffect : AbstractArrowEffect(){
         )
         val ocelot = projectile.projectile as Ocelot
         ocelot.catType = Ocelot.Type.values()[Random.nextInt(Ocelot.Type.values().size-1)]
-        ocelot.owner = pl
+        ocelot.owner = projectile.player
         ocelot.velocity = vector.normalize()
 
     }
