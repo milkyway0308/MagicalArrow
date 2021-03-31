@@ -40,6 +40,7 @@ class MagicalArrow : JavaPlugin() {
         register("thunder", ThunderStrikeArrow())
         register("freeze", FreezingArrow)
         register("frosthorn", FrostHornArrow)
+        register("scattering", ScatteringArrowEffect())
         Bukkit.getPluginManager().registerEvents(ProjectileListener(), this)
     }
 }

@@ -17,7 +17,7 @@ class NekoArrowEffect : AbstractArrowEffect(){
         )
         val ocelot = projectile.projectile as Ocelot
         ocelot.catType = Ocelot.Type.values()[Random.nextInt(Ocelot.Type.values().size-1)]
-        ocelot.owner = projectile.player
+//        ocelot.owner = projectile.player
         ocelot.velocity = vector.normalize()
 
     }
