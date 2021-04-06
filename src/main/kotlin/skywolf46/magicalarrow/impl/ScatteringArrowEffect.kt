@@ -11,7 +11,9 @@ class ScatteringArrowEffect : AbstractArrowEffect() {
         projectile.removeAbility(this)
         // Scattering arrow
         for (x in 0..8) {
-            projectile.shootWithout(arrayListOf(MagicalArrow[this]!!), Vector(Random.nextDouble(-0.5, 0.5) + 1, Random.nextDouble(-0.5, 0.5) + 1, Random.nextDouble(-0.5, 0.5) + 1))
+            projectile.shootWithout(arrayListOf(MagicalArrow[this]!!),
+                Vector(Random.nextDouble(-0.5, 0.5), Random.nextDouble(-0.5, 0.5), Random.nextDouble(-0.5, 0.5)),
+                Vector(1, 1, 1))
         }
 
     }

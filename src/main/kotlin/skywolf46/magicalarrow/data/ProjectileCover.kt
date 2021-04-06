@@ -1,5 +1,6 @@
 package skywolf46.magicalarrow.data
 
+import org.bukkit.Location
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
@@ -20,9 +21,31 @@ class ProjectileCover(val item: ItemStack, val player: Player, entity: Entity) {
             field = value
         }
 
-    fun shootWithout(ignore: List<String>, vectorMultiplier: Vector): ProjectileCover {
+    fun spawnWithout(ignore: List<String>, loc: Location, additional: Vector, multiplier: Vector): ProjectileCover {
+        val arrow = projectile.world.spawn(loc, Arrow::class.java)
+        arrow.velocity = projectile.velocity.clone().add(additional).multiply(multiplier)
+        val cover = ProjectileCover(item.clone(), player, arrow)
+        arrow.shooter = player
+        arrow.pickupStatus = Arrow.PickupStatus.DISALLOWED
+        arrow.setValue("MagicalArrow", cover)
+
+        with(cover.item.getTag()) {
+            val list = getList("MagicalArrow")!!
+            for (x in ignore) {
+                list.remove(x)
+            }
+            for (x in (0 until list.size())) {
+                MagicalArrow[list.get(x)?.get() as String]
+                    ?.onArrowShoot(cover)
+            }
+        }
+        return cover
+    }
+
+
+    fun shootWithout(ignore: List<String>, additional: Vector, multiplier: Vector): ProjectileCover {
         val arrow = player.launchProjectile(Arrow::class.java,
-            projectile.velocity.clone().multiply(vectorMultiplier))
+            projectile.velocity.clone().add(additional).multiply(multiplier))
         val cover = ProjectileCover(item.clone(), player, arrow)
         arrow.shooter = player
         arrow.pickupStatus = Arrow.PickupStatus.DISALLOWED

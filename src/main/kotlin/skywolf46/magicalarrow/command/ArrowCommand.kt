@@ -3,6 +3,7 @@ package skywolf46.magicalarrow.command
 import org.bukkit.Material
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import skywolf46.commandannotation.CommandAnnotation
 import skywolf46.commandannotation.annotations.autocomplete.AutoComplete
 import skywolf46.commandannotation.annotations.autocomplete.AutoCompleteProvider
 import skywolf46.commandannotation.annotations.legacy.MinecraftCommand
@@ -10,6 +11,7 @@ import skywolf46.commandannotation.annotations.minecraft.PermissionHandler
 import skywolf46.commandannotation.data.command.CommandArgument
 import skywolf46.commandannotation.util.AutoCompleteUtil
 import skywolf46.magicalarrow.MagicalArrow
+import skywolf46.refnbt.impl.collections.CompoundNBTField
 import skywolf46.refnbt.util.item.getTag
 
 object ArrowCommand {
@@ -34,6 +36,7 @@ object ArrowCommand {
             return
         }
         val data = item.getTag()
+
         val lst = data.getOrCreateList("MagicalArrow")
         for (x in 0 until lst.size()) {
             if(lst.get(x)?.get()?.equals(arg[0]) == true){
@@ -41,9 +44,12 @@ object ArrowCommand {
                 return
             }
         }
+
         lst.add(arg[0])
         sendMessage("§aAbility §e" + arg[0] + " §aadded to arrow.")
     }
+
+
 
     @AutoCompleteProvider("arrowList")
     @JvmStatic

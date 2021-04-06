@@ -24,7 +24,7 @@ class MagicalArrow : JavaPlugin() {
 
         operator fun get(eff: AbstractArrowEffect) = revMap[eff]
 
-        fun getList() : List<String> = ArrayList<String>(map.keys)
+        fun getList(): List<String> = ArrayList<String>(map.keys)
     }
 
     override fun onEnable() {
@@ -41,6 +41,8 @@ class MagicalArrow : JavaPlugin() {
         register("freeze", FreezingArrow)
         register("frosthorn", FrostHornArrow)
         register("scattering", ScatteringArrowEffect())
+        register("volley", ArrowVolleyEffect())
+        register("push", InvisibleForceArrow())
         Bukkit.getPluginManager().registerEvents(ProjectileListener(), this)
     }
 }

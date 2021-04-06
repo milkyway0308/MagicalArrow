@@ -5,7 +5,9 @@ import org.bukkit.block.Block
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.event.entity.ProjectileHitEvent
+import skywolf46.commandannotation.data.command.CommandArgument
 import skywolf46.magicalarrow.data.ProjectileCover
+import skywolf46.refnbt.impl.collections.CompoundNBTField
 
 abstract class AbstractArrowEffect {
     open fun onArrowCollideBlock(
@@ -36,6 +38,9 @@ abstract class AbstractArrowEffect {
 
     }
 
+    open fun Player.doCommand(ref: CompoundNBTField, arg: CommandArgument){
+
+    }
     open fun requireDestroy() = false
 
     open fun priority(): Int {

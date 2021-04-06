@@ -54,7 +54,9 @@ class ProjectileListener : Listener {
                 val list = getList("MagicalArrow")!!
                 if (hitBlock != null) {
                     for (x in (0 until list.size())) {
-                        MagicalArrow.get(list.get(x)?.get() as String)
+                        if(x >= list.size())
+                            break
+                        MagicalArrow[list.get(x)?.get() as String]
                             ?.onArrowCollideBlock(item,
                                 entity.location, hitBlock!!,
                                 this@onEvent)
